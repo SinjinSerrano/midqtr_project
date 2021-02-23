@@ -1,7 +1,7 @@
 """
 DSC 20 Mid-Quarter Project
 Name: Sinjin Serrano and David Perez
-PID:  A16687329 / A________
+PID:  A16687329 / A16686629
 """
 
 # Part 1: RGB Image #
@@ -107,8 +107,8 @@ class ImageProcessing:
         """
         TODO: add description
         """
-        # YOUR CODE GOES HERE #
-
+        
+        
     @staticmethod
     def grayscale(image):
         """
