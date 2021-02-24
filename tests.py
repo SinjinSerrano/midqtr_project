@@ -5,6 +5,7 @@ from midqtr_project import (
     ImageProcessing as IP
 )
 
+#Sample pixel matrix to test the different methods
 pixels = [
 [
     [100, 200, 150, 20],
