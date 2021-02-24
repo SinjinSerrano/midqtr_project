@@ -69,7 +69,7 @@ def main():
     print("--------- Testing Asserts")
 
     #  Test negate(image)
-    print("========================== Testing set_pixel(self, row, col, new_color)")
+    print("========================== Testing negate(image)")
     print("Making RGB Instances")
     test_img0 = runner.img_read('img/dsc20.png')
     test_img1 = runner.img_read('img/blue_gradient.png')
@@ -83,5 +83,16 @@ def main():
     runner.img_save('img/out/blue_gradient_inverted.png', test_img1_inverted)
     runner.img_save('img/out/pepe_inverted.png', test_img2_inverted)
 
+    #  Test grayscale(image)
+    print("========================== Testing grayscale(image)")
+    print("Using previus RGB Instances")
+    print("Making grayscale Instances")
+    test_img0_gray = ImageProcessing.grayscale(test_img0)
+    test_img1_gray = ImageProcessing.grayscale(test_img1)
+    test_img2_gray = ImageProcessing.grayscale(test_img2)
+    print("Exporting grayscale images")
+    runner.img_save('img/out/dsc20_grayscale.png', test_img0_gray)
+    runner.img_save('img/out/blue_gradient_grayscale.png', test_img1_gray)
+    runner.img_save('img/out/pepe_grayscale.png', test_img2_gray)
 
 main()
