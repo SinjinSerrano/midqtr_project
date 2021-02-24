@@ -15,6 +15,14 @@ class RGBImage:
     Values are unsigned 8-bit integers, meaning they range from 0,
     indicating no presence, and 255, indicating full presence.
 
+    'pixels' is a three-dimensional list used to store RGBImage's data.
+    The first dimension is an integer indicating which color channel is
+    represented (0 - red, 1 - green, 2 - blue)
+    The second dimension indicates the pixel's row index, while the third
+    dimension indicates the pixel's column index.
+    The value stored there is a three-element tuple representing using the
+    RGB color model to store that pixel's value.
+
     TODO: Test methods.
     """
 
@@ -24,15 +32,6 @@ class RGBImage:
         Assume:
             - Index of channel c is guaranteed to be 0, 1, or 2
             - Each channel contains a valid (row x col) matrix
-        Parameters:
-            pixels (lst): a three-dimensional list used to store RGBImage's
-                data. The first dimension is an integer indicating which color
-                channel is represented (0 - red, 1 - green, 2 - blue)
-                The second dimension indicates the pixel's row index, while
-                the third dimension indicates the pixel's column index. The
-                value stored there is a three-element tuple representing using
-                the RGB color model to store that pixel's value.
-
         """
         self.pixels = pixels
 
@@ -99,20 +98,25 @@ class RGBImage:
 
 
 
-
 # Part 2: Image Processing Methods #
 class ImageProcessing:
     """
-    TODO: add description
+
     """
 
     @staticmethod
     def negate(image):
         """
-        TODO: add description
+
         """
-        
-        
+
+        pixels = [[[255 - image.get_pixel(row_ind, col_ind)[run] \
+        for col_ind in range(image.size()[1])]\
+        for row_ind in range(image.size()[0])]\
+        for run in range(0, 3, 1)]
+
+        return RGBImage(pixels)
+
     @staticmethod
     def grayscale(image):
         """
