@@ -107,8 +107,9 @@ class ImageProcessing:
     @staticmethod
     def negate(image):
         """
-        This code takes an image and creates a version that inverts/negates the color values of each pixel
-        by doing the subtraction, 255 - current color value.
+        This code takes an image and creates a version that inverts/negates
+        the color values of each pixel by doing the subtraction, 255 - current
+        color value.
         """
 
         negated_pixels = [[[255 - image.get_pixel(row_ind, col_ind)[run] \
