@@ -122,7 +122,9 @@ class ImageProcessing:
     @staticmethod
     def grayscale(image):
         """
-
+        This code takes an image and creates a version that is a grayscale
+        version of the original by taking adding the color values at a pixel,
+        averaging them and setting all three values to the new value.
         """
 
         gray_pixels = [[[((image.get_pixel(row_ind, col_ind)[0] +\
