@@ -15,14 +15,6 @@ class RGBImage:
     Values are unsigned 8-bit integers, meaning they range from 0,
     indicating no presence, and 255, indicating full presence.
 
-    'pixels' is a three-dimensional list used to store RGBImage's data.
-    The first dimension is an integer indicating which color channel is
-    represented (0 - red, 1 - green, 2 - blue)
-    The second dimension indicates the pixel's row index, while the third
-    dimension indicates the pixel's column index.
-    The value stored there is a three-element tuple representing using the
-    RGB color model to store that pixel's value.
-
     TODO: Test methods.
     """
 
@@ -32,6 +24,15 @@ class RGBImage:
         Assume:
             - Index of channel c is guaranteed to be 0, 1, or 2
             - Each channel contains a valid (row x col) matrix
+        Parameters:
+            pixels (lst): a three-dimensional list used to store RGBImage's
+                data. The first dimension is an integer indicating which color
+                channel is represented (0 - red, 1 - green, 2 - blue)
+                The second dimension indicates the pixel's row index, while
+                the third dimension indicates the pixel's column index. The
+                value stored there is a three-element tuple representing using
+                the RGB color model to store that pixel's value.
+
         """
         self.pixels = pixels
 
@@ -85,14 +86,17 @@ class RGBImage:
         iGREEN = 1
         iBLUE = 2
         color = self.get_pixel(row, col)
-        if new_color[iRED] != -1:
-            color[iRED] = new_color[iRED]
-        if new_color[iGREEN] != -1:
-            color[iGREEN] = new_color[iGREEN]
-        if new_color[iBLUE] != -1:
-            color[iBLUE] = new_color[iBLUE]
-        for i in range(3):
-            self.pixel[i][row][col] = color[i]
+        red = color[iRED] if new_color[iRED] == -1\
+            else new_color[iRED]
+        green = color[iGREEN] if new_color[iGREEN] == -1\
+            else new_color[iGREEN]
+        blue = color[iBLUE] if new_color[iBLUE] == -1\
+            else new_color[iBLUE]
+        # I am almost certain there is a much better way to do this
+        self.pixels[iRED][row][col] = red
+        self.pixels[iGREEN][row][col] = green
+        self.pixels[iBLUE][row][col] = blue
+
 
 
 
