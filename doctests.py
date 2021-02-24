@@ -2,6 +2,8 @@
 doctests.py
 """
 from midqtr_project import RGBImage
+from midqtr_project import ImageProcessing
+import midqtr_project_runner as runner
 
 # Not the most professional tests but it gets the job done.
 
@@ -65,6 +67,21 @@ def main():
     img.set_pixel(0, 0, (-1, -1, -1))
     print(str(img.get_pixels()))
     print("--------- Testing Asserts")
+
+    #  Test negate(image)
+    print("========================== Testing set_pixel(self, row, col, new_color)")
+    print("Making RGB Instances")
+    test_img0 = runner.img_read('img/dsc20.png')
+    test_img1 = runner.img_read('img/blue_gradient.png')
+    test_img2 = runner.img_read('img/pepe.png')
+    print("Making Inverted Instances")
+    test_img0_inverted = ImageProcessing.negate(test_img0)
+    test_img1_inverted = ImageProcessing.negate(test_img1)
+    test_img2_inverted = ImageProcessing.negate(test_img2)
+    print("Exporting inverted images")
+    runner.img_save('img/out/dsc20_inverted.png', test_img0_inverted)
+    runner.img_save('img/out/blue_gradient_inverted.png', test_img1_inverted)
+    runner.img_save('img/out/pepe_inverted.png', test_img2_inverted)
 
 
 main()
