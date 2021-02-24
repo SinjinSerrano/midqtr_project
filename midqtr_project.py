@@ -107,15 +107,16 @@ class ImageProcessing:
     @staticmethod
     def negate(image):
         """
-
+        This code takes an image and creates a version that inverts/negates the color values of each pixel
+        by doing the subtraction, 255 - current color value.
         """
 
-        pixels = [[[255 - image.get_pixel(row_ind, col_ind)[run] \
+        negated_pixels = [[[255 - image.get_pixel(row_ind, col_ind)[run] \
         for col_ind in range(image.size()[1])]\
         for row_ind in range(image.size()[0])]\
-        for run in range(0, 3, 1)]
+        for run in range(3)]
 
-        return RGBImage(pixels)
+        return RGBImage(negated_pixels)
 
     @staticmethod
     def grayscale(image):
