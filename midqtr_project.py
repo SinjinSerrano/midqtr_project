@@ -122,9 +122,18 @@ class ImageProcessing:
     @staticmethod
     def grayscale(image):
         """
-        TODO: add description
+
         """
-        # YOUR CODE GOES HERE #
+
+        gray_pixels = [[[((image.get_pixel(row_ind, col_ind)[0] +\
+        image.get_pixel(row_ind, col_ind)[1] + \
+        image.get_pixel(row_ind, col_ind)[2]) // 3) \
+        for col_ind in range(image.size()[1])]\
+        for row_ind in range(image.size()[0])]\
+        for run in range(3)]
+
+
+        return RGBImage(gray_pixels)
 
     @staticmethod
     def clear_channel(image, channel):
