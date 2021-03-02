@@ -163,7 +163,7 @@ class ImageProcessing:
     @staticmethod
     def crop(image, tl_row, tl_col, target_size):
         """
-        A method which takes an RBGImage and returns a version cropped,
+        A method which takes an RGBImage and returns a version cropped,
         the top-left denoted by tl_row and tl_col, and the size denoted
         by target_size where possible.
         """
@@ -184,10 +184,25 @@ class ImageProcessing:
     @staticmethod
     def chroma_key(chroma_image, background_image, color):
         """
-        TODO: add description
+        A choroma key algorithm that returns a copy of an RGBImage, where
+        pixels that match the specified color are replaced by the
+        corresponding pixel in the background image.
         """
-        # YOUR CODE GOES HERE #
+        img_size = chroma_image.size()
+        assert isinstance(chroma_image, RGBImage) \
+            and isinstance(background_image, RGBImage)
+        assert img_size == background_image.size()
+        rows = img_size[0]
+        cols = img_size[1]
+        new_img = RGBImage(chroma_image.get_pixels())
+        for r in range(rows):
+            for c in range(cols):
+                if color == chroma_image.get_pixel(r, c):
+                    bg_color = background_image.get_pixel(r, c)
+                    new_img.set_pixel(r, c, bg_color)
+        return new_img
 
+                
     # rotate_180 IS FOR EXTRA CREDIT (points undetermined)
     @staticmethod
     def rotate_180(image):

@@ -139,4 +139,14 @@ def main():
     runner.img_save('img/out/blue_gradient_cropped_0.png', test_img1_crop0)
     runner.img_save('img/out/pepe_cropped_0.png', test_img2_crop0)
 
+    #  Test chroma_key(chroma_image, background_image, color)
+    print("========================== Testing crop(chroma_image, background_image, color)")
+    print("Using previous RGB Instances:")
+    print("Using DSC20 as chroma key and blue_gradient as background.")
+    test_img0_chroma0 = ImageProcessing.chroma_key(test_img0, test_img1, (255,255,255))
+    test_img0_chroma1 = ImageProcessing.chroma_key(test_img0, test_img1, (255,205,210))
+    print("Exporting chroma-keyed images")
+    runner.img_save('img/out/dsc20_chroma_0.png', test_img0_chroma0)
+    runner.img_save('img/out/dsc20_chroma_1.png', test_img0_chroma1)
+
 main()
