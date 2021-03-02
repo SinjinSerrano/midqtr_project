@@ -151,21 +151,35 @@ class ImageProcessing:
         pixels = image.get_pixels()
         red = pixels[iRED]
         if channel == iRED:
-            red = [[0 for intensity in row] for row in pixels[iRED]]
+            red = [[0 for _ in row] for row in pixels[iRED]]
         green = pixels[iGREEN]
         if channel == iGREEN:
-            green = [[0 for intensity in row] for row in pixels[iGREEN]]
+            green = [[0 for _ in row] for row in pixels[iGREEN]]
         blue = pixels[iBLUE]
         if channel == iBLUE:
-            blue = [[0 for intensity in row] for row in pixels[iBLUE]]
+            blue = [[0 for _ in row] for row in pixels[iBLUE]]
         return RGBImage([red, green, blue])
 
     @staticmethod
     def crop(image, tl_row, tl_col, target_size):
         """
-        TODO: add description
+        A method which takes an RBGImage and returns a version cropped,
+        the top-left denoted by tl_row and tl_col, and the size denoted
+        by target_size where possible.
         """
-        # YOUR CODE GOES HERE #
+        orig_size = image.size()
+        cropped_rows = target_size[0] if \
+            orig_size[0] - tl_row - target_size[0] > 0 else \
+                orig_size[0] - tl_row
+        cropped_cols = target_size[1] if \
+            orig_size[1] - tl_col - target_size[1] > 0 else \
+                orig_size[1] - tl_col
+        new_pixels = [[[intensity for c, intensity in enumerate(row) \
+            if tl_col <= c < tl_col + cropped_cols] \
+            for r, row in enumerate(channel) \
+            if tl_row <= r < tl_row + cropped_rows] \
+            for channel in image.get_pixels()]
+        return RGBImage(new_pixels)
 
     @staticmethod
     def chroma_key(chroma_image, background_image, color):
