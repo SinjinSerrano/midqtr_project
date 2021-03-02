@@ -91,7 +91,6 @@ class RGBImage:
             else new_color[iGREEN]
         blue = color[iBLUE] if new_color[iBLUE] == -1\
             else new_color[iBLUE]
-        # I am almost certain there is a much better way to do this
         self.pixels[iRED][row][col] = red
         self.pixels[iGREEN][row][col] = green
         self.pixels[iBLUE][row][col] = blue
@@ -101,7 +100,10 @@ class RGBImage:
 # Part 2: Image Processing Methods #
 class ImageProcessing:
     """
-
+    TODO: review description
+    A class that contains several different static methods used to manipulate
+    RGBImage objects. New instances are returned after being passed through
+    these methods.
     """
 
     @staticmethod
@@ -140,9 +142,23 @@ class ImageProcessing:
     @staticmethod
     def clear_channel(image, channel):
         """
-        TODO: add description
+        A method which takes an RGBImage and returns a version with the
+        specified channel cleared (their intensities set to 0).
         """
-        # YOUR CODE GOES HERE #
+        iRED = 0
+        iGREEN = 1
+        iBLUE = 2
+        pixels = image.get_pixels()
+        red = pixels[iRED]
+        if channel == iRED:
+            red = [[0 for intensity in row] for row in pixels[iRED]]
+        green = pixels[iGREEN]
+        if channel == iGREEN:
+            green = [[0 for intensity in row] for row in pixels[iGREEN]]
+        blue = pixels[iBLUE]
+        if channel == iBLUE:
+            blue = [[0 for intensity in row] for row in pixels[iBLUE]]
+        return RGBImage([red, green, blue])
 
     @staticmethod
     def crop(image, tl_row, tl_col, target_size):
