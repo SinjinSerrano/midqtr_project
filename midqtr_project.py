@@ -207,9 +207,12 @@ class ImageProcessing:
     @staticmethod
     def rotate_180(image):
         """
-        TODO: add description
+        A method which returns a 180 degree rotation of an image.
         """
-        # YOUR CODE GOES HERE #
+        pixels = image.get_pixels()
+        new_pixels = [[[intensity for intensity in row[::-1]] \
+            for row in channel[::-1]] for channel in pixels]
+        return RGBImage(new_pixels)
 
 
 # Part 3: Image KNN Classifier #

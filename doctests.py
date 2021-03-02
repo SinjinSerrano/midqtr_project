@@ -149,4 +149,15 @@ def main():
     runner.img_save('img/out/dsc20_chroma_0.png', test_img0_chroma0)
     runner.img_save('img/out/dsc20_chroma_1.png', test_img0_chroma1)
 
+    #  Test rotate_180(image)
+    print("========================== Testing crop(chroma_image, background_image, color)")
+    print("Using previous RGB Instances:")
+    test_img0_rotated = ImageProcessing.rotate_180(test_img0)
+    test_img1_rotated = ImageProcessing.rotate_180(test_img1)
+    test_img2_rotated = ImageProcessing.rotate_180(test_img2)
+    print("Exporting rotated images")
+    runner.img_save('img/out/dsc20_rotated.png', test_img0_rotated)
+    runner.img_save('img/out/blue_gradient_rotated.png', test_img1_rotated)
+    runner.img_save('img/out/pepe_rotated.png', test_img2_rotated)
+
 main()
