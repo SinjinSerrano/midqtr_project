@@ -4,6 +4,8 @@ Name: Sinjin Serrano and David Perez
 PID:  A16687329 / A16686629
 """
 
+import numpy as np
+
 # Part 1: RGB Image #
 class RGBImage:
     """
