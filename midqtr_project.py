@@ -224,20 +224,26 @@ class ImageProcessing:
 # Part 3: Image KNN Classifier #
 class ImageKNNClassifier:
     """
-    TODO: add description
+    This class uses a data set to predict the tag for a given image sent in.
+    It does this by finding the distance between every pixel and every channel
+    in those pixels. By comparing the most common tags, it decides the best
+    fit for the image using the methods below.
+
     """
     data = []
 
     def __init__(self, n_neighbors):
         """
-        TODO: add description
+        This code initilizes a ImageKNNClassifier class that has k_neighbors as an input parameter
+        and data in the form of a tuple with an image and a image tag string.
         """
         self.n_neighbors = n_neighbors
         ImageKNNClassifier.data = []
 
     def fit(self, data):
         """
-        TODO: add description
+        This code fits a data set that is greater than the number of neighbors, if it has not already been
+        assigned data.
         """
         assert len(data) > self.n_neighbors
         assert len(ImageKNNClassifier.data) == 0
@@ -246,7 +252,8 @@ class ImageKNNClassifier:
     @staticmethod
     def distance(image1, image2):
         """
-        TODO: add description
+        This code compares every pixel intensity in every channel for two images and performs
+        a Euclid distance calculation between them.
         """
         assert isinstance(image1, RGBImage) and isinstance(image2, RGBImage)
         assert image1.size() == image2.size()
@@ -260,7 +267,11 @@ class ImageKNNClassifier:
     @staticmethod
     def vote(candidates):
         """
-        TODO: add description
+        This code takes a list of tags equal to the amount of neighbors
+        in k_neighbors. It first creates a dictionary of tags and the
+        count of how many times they show up. It then sorts them and
+        returns the tag with the highest frequency. If two tags are the
+        highest, it randomly chooses between them.
         """
         label_counter = {}
         for candidate in candidates:
@@ -282,7 +293,10 @@ class ImageKNNClassifier:
 
     def predict(self, image):
         """
-        TODO: add description
+        This code first checks if the dataset in the class is filled. If it
+        is, it then sorts a list of tuple objects with distances and tags,
+        and finally finds the n_neighbors that are the closest and compares
+        tags using vote().
         """
         assert len(ImageKNNClassifier.data) > 0
         distance_tag = [(ImageKNNClassifier.distance(image, tag_img[0]),\
