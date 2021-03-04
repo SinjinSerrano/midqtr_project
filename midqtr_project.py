@@ -242,6 +242,7 @@ class ImageKNNClassifier:
         """
         TODO: add description
         """
+        assert isinstance(image1, RGBImage) and isinstance(image2, RGBImage)
         assert image1.size() == image2.size()
         distance = (sum([(image1.get_pixel(row_ind, col_ind)[channel]\
         - image2.get_pixel(row_ind, col_ind)[channel])**2 \
