@@ -9,7 +9,6 @@ import numpy as np
 # Part 1: RGB Image #
 class RGBImage:
     """
-    TODO: review description
     Creates a RGBImage class, an abstraction of an image using RGB colorspace.
 
     The RGB color model is a tuple of three integers (intensity) indicating
@@ -24,8 +23,6 @@ class RGBImage:
     dimension indicates the pixel's column index.
     The value stored there is a three-element tuple representing using the
     RGB color model to store that pixel's value.
-
-    TODO: Test methods.
     """
 
     def __init__(self, pixels):
@@ -103,7 +100,6 @@ class RGBImage:
 # Part 2: Image Processing Methods #
 class ImageProcessing:
     """
-    TODO: review description
     A class that contains several different static methods used to manipulate
     RGBImage objects. New instances are returned after being passed through
     these methods.
@@ -230,16 +226,17 @@ class ImageKNNClassifier:
 
     def __init__(self, n_neighbors):
         """
-        This code initilizes a ImageKNNClassifier class that has k_neighbors as an input parameter
-        and data in the form of a tuple with an image and a image tag string.
+        This code initilizes a ImageKNNClassifier class that has k_neighbors
+        as an input parameter and data in the form of a tuple with an image
+        and a image tag string.
         """
         self.n_neighbors = n_neighbors
         ImageKNNClassifier.data = []
 
     def fit(self, data):
         """
-        This code fits a data set that is greater than the number of neighbors, if it has not already been
-        assigned data.
+        This code fits a data set that is greater than the number of
+        neighbors, if it has not already been assigned data.
         """
         assert len(data) > self.n_neighbors
         assert len(ImageKNNClassifier.data) == 0
@@ -248,8 +245,9 @@ class ImageKNNClassifier:
     @staticmethod
     def distance(image1, image2):
         """
-        This code compares every pixel intensity in every channel for two images and performs
-        a Euclid distance calculation between them.
+        This code compares every pixel intensity in every channel
+        for two images and performs a Euclid distance calculation between
+        them.
         """
         assert isinstance(image1, RGBImage) and isinstance(image2, RGBImage)
         assert image1.size() == image2.size()
