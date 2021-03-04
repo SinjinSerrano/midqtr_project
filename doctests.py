@@ -3,7 +3,9 @@ doctests.py
 """
 from midqtr_project import RGBImage
 from midqtr_project import ImageProcessing
+from midqtr_project import ImageKNNClassifier as KNN
 import midqtr_project_runner as runner
+
 
 # Not the most professional tests but it gets the job done.
 
@@ -159,5 +161,71 @@ def main():
     runner.img_save('img/out/dsc20_rotated.png', test_img0_rotated)
     runner.img_save('img/out/blue_gradient_rotated.png', test_img1_rotated)
     runner.img_save('img/out/pepe_rotated.png', test_img2_rotated)
+
+    #  Test KNN Classifier constructor and fit
+    print("========================== Testing fit(self, data)")
+    classifier = KNN(2)
+    failed0 = KNN(3)
+    data0 = [(test_img0, 'dsc20'), (test_img1, 'blue'), (test_img2, 'pepe')]
+    data1 = [(test_img0_rotated, 'dsc20_rotated'), (test_img1_rotated, 'blue_rotated'), (test_img2_rotated, 'pepe_rotated')]
+    classifier.fit(data0)
+    print(classifier.data)
+    # Test first assert
+    print("Testing first assert:")
+    try:
+        failed0.fit(data0)
+    except AssertionError:
+        print("    failed successfully")
+    # Test second assert
+    print("Testing second assert:")
+    try:
+        classifier.fit(data1)
+    except AssertionError:
+        print("    failed successfully")
+
+    #  Test distance(image1, image2)
+    print("========================== Testing distance(image1, image2")
+    test_distance = KNN.distance(test_img0, test_img1)
+    print(test_distance)
+    # Test first assert
+    print("Testing first assert:")
+    uh = "uh"
+    try:
+        test_distance = KNN.distance(uh, test_img1)
+    except AssertionError:
+        print("    failed successfully")
+    try:
+        test_distance = KNN.distance(test_img1, uh)
+    except AssertionError:
+        print("    failed successfully")
+    try:
+        test_distance = KNN.distance(uh, uh)
+    except:
+        print("    failed successfully")
+
+
+    #  Test vote(candidates)
+    print("========================== Testing vote(candidates)")
+    labels = [i[1] for i in data0]
+    vote = KNN.vote(labels)
+    print(vote)
+
+    #  Test predict(self, image)
+    print("========================== Testing predict(self, image)")
+    try:
+        prediction01 = classifier.predict(test_img1)
+    except AssertionError:
+        print("    failed successfully")
+    # Test first assert
+    print("Testing first assert:")
+    failed1 = KNN(2)
+    try:
+        failed = failed1.predict(test_img0)
+    except AssertionError:
+        print("    failed successfully")
+
+    #  Use runner to test all of ImageKNNClassifier
+    print("========================== Final Tests")
+    runner.knn_test_examples()
 
 main()

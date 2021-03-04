@@ -230,6 +230,7 @@ class ImageKNNClassifier:
         TODO: add description
         """
         self.n_neighbors = n_neighbors
+        ImageKNNClassifier.data = []
 
     def fit(self, data):
         """
