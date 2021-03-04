@@ -68,7 +68,8 @@ class RGBImage:
         iRED = 0
         iGREEN = 1
         iBLUE = 2
-        return (self.pixels[iRED][row][col], self.pixels[iGREEN][row][col], self.pixels[iBLUE][row][col])
+        return (self.pixels[iRED][row][col], self.pixels[iGREEN][row][col],\
+        self.pixels[iBLUE][row][col])
 
     def set_pixel(self, row, col, new_color):
         """
@@ -202,7 +203,7 @@ class ImageProcessing:
                     new_img.set_pixel(r, c, bg_color)
         return new_img
 
-                
+
     # rotate_180 IS FOR EXTRA CREDIT (points undetermined)
     @staticmethod
     def rotate_180(image):
@@ -220,35 +221,65 @@ class ImageKNNClassifier:
     """
     TODO: add description
     """
+    data = []
 
     def __init__(self, n_neighbors):
         """
         TODO: add description
         """
-        # YOUR CODE GOES HERE #
+        self.n_neighbors = n_neighbors
 
     def fit(self, data):
         """
         TODO: add description
         """
-        # YOUR CODE GOES HERE #
+        assert len(data) > self.n_neighbors
+        assert len(ImageKNNClassifier.data) == 0
+        ImageKNNClassifier.data = data
 
     @staticmethod
     def distance(image1, image2):
         """
         TODO: add description
         """
-        # YOUR CODE GOES HERE #
+        assert image1.size() == image2.size()
+        distance = (sum([(image1.get_pixel(row_ind, col_ind)[channel]\
+        - image2.get_pixel(row_ind, col_ind)[channel])**2 \
+        for col_ind in range(image1.size()[1])\
+        for row_ind in range(image1.size()[0])\
+        for channel in range(3)]))**1/2
+        return distance
 
     @staticmethod
     def vote(candidates):
         """
         TODO: add description
         """
-        # YOUR CODE GOES HERE #
+        label_counter = {}
+        for candidate in candidates:
+            if not candidate in label_counter:
+                label_counter[candidate] = 1
+            else:
+                label_counter[candidate] += 1
+        highest = 0
+        option = None
+        for label, amount in label_counter.items():
+            if highest < amount:
+                option = label
+                highest = amount
+            elif highest == amount:
+                option = np.random.choice([option, label])
+        return option
+
+
 
     def predict(self, image):
         """
         TODO: add description
         """
-        # YOUR CODE GOES HERE #
+        assert len(ImageKNNClassifier.data) > 0
+        distance_tag = [(ImageKNNClassifier.distance(image, tag_image[0]),\
+        tag_img[1]) for tag_img in ImageKNNClassifier.data]
+        distance_tag.sort()
+        close_tag = [tag[1] for tag in distance_tag]
+        return ImageKNNClassifier.vote(close_tag[0:n_neighbors - 1])

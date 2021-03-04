@@ -30,3 +30,28 @@ print(negated.get_pixels())
 print('\n' + str(test.get_pixels()))
 grayed = IP.grayscale(test)
 print(grayed.get_pixels())
+
+#Testing the vote code
+choices = ['h','e','h','e','e','r','h']
+count = {}
+for choice in choices:
+    if not choice in count:
+        count[choice] = 1
+    else:
+        count[choice] += 1
+print(count)
+highest = 0
+option = None
+for choice, amount in count.items():
+    if highest < amount:
+        option = choice
+        highest = amount
+    elif highest == amount:
+        option = np.random.choice([option, choice])
+print(option)
+
+#Testing the sort on tuples
+tuples = [(6, '4'), (3.1, '1'), (5.3, '3'), (4, '2')]
+tuples.sort()
+close = [tuple[1] for tuple in tuples]
+print(close)
