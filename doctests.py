@@ -53,6 +53,28 @@ def main():
     my_pixel = img.get_pixel(1, 1)
     print("Expected: (208, 136, 169)")
     print("Got:      " + str(my_pixel))
+    # Test first assert
+    print("Testing first assert:")
+    try:
+        my_pixel = img.get_pixel(1, 999)
+    except AssertionError:
+        print("    failed successfully")
+    try:
+        my_pixel = img.get_pixel(999, 1)
+    except AssertionError:
+        print("    failed successfully")
+    try:
+        my_pixel = img.get_pixel(999, 999)
+    except AssertionError:
+        print("    failed successfully")
+    try:
+        my_pixel = img.get_pixel(-1, 0)
+    except AssertionError:
+        print("    failed successfully")
+    try:
+        my_pixel = img.get_pixel(0, -1)
+    except AssertionError:
+        print("    failed successfully")
 
 
     #  Test set_pixel(self, row, col, new_color)
@@ -69,6 +91,26 @@ def main():
     img.set_pixel(0, 0, (-1, -1, -1))
     print(str(img.get_pixels()))
     print("--------- Testing Asserts")
+    try:
+        img.set_pixel(1, 999, (-1, -1, -1))
+    except AssertionError:
+        print("    failed successfully")
+    try:
+        img.set_pixel(999, 1, (-1, -1, -1))
+    except AssertionError:
+        print("    failed successfully")
+    try:
+        img.set_pixel(999, 999, (-1, -1, -1))
+    except AssertionError:
+        print("    failed successfully")
+    try:
+        img.set_pixel(-1, 0, (-1, -1, -1))
+    except AssertionError:
+        print("    failed successfully")
+    try:
+       img.set_pixel(0, -1, (-1, -1, -1))
+    except AssertionError:
+        print("    failed successfully")
 
     #  Test negate(image)
     print("========================== Testing negate(image)")
