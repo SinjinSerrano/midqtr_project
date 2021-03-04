@@ -9,6 +9,7 @@ import numpy as np
 # Part 1: RGB Image #
 class RGBImage:
     """
+    TODO: review description
     Creates a RGBImage class, an abstraction of an image using RGB colorspace.
 
     The RGB color model is a tuple of three integers (intensity) indicating
@@ -24,6 +25,7 @@ class RGBImage:
     The value stored there is a three-element tuple representing using the
     RGB color model to store that pixel's value.
 
+    TODO: Test methods.
     """
 
     def __init__(self, pixels):
@@ -101,6 +103,7 @@ class RGBImage:
 # Part 2: Image Processing Methods #
 class ImageProcessing:
     """
+    TODO: review description
     A class that contains several different static methods used to manipulate
     RGBImage objects. New instances are returned after being passed through
     these methods.
@@ -114,12 +117,10 @@ class ImageProcessing:
         color value.
         """
 
-        MAX = 255
-        CHANNELS = 3
-        negated_pixels = [[[MAX - image.get_pixel(row_ind, col_ind)[run] \
+        negated_pixels = [[[255 - image.get_pixel(row_ind, col_ind)[run] \
         for col_ind in range(image.size()[1])]\
         for row_ind in range(image.size()[0])]\
-        for run in range(CHANNELS)]
+        for run in range(3)]
 
         return RGBImage(negated_pixels)
 
@@ -131,16 +132,12 @@ class ImageProcessing:
         averaging them and setting all three values to the new value.
         """
 
-        iRED = 0
-        iGREEN = 1
-        iBLUE = 2
-        CHANNELS = 3
-        gray_pixels = [[[((image.get_pixel(row_ind, col_ind)[iRED] +\
-        image.get_pixel(row_ind, col_ind)[iGREEN] + \
-        image.get_pixel(row_ind, col_ind)[iBLUE]) // CHANNELS) \
+        gray_pixels = [[[((image.get_pixel(row_ind, col_ind)[0] +\
+        image.get_pixel(row_ind, col_ind)[1] + \
+        image.get_pixel(row_ind, col_ind)[2]) // 3) \
         for col_ind in range(image.size()[1])]\
         for row_ind in range(image.size()[0])]\
-        for run in range(CHANNELS)]
+        for run in range(3)]
 
 
         return RGBImage(gray_pixels)
@@ -224,20 +221,22 @@ class ImageProcessing:
 # Part 3: Image KNN Classifier #
 class ImageKNNClassifier:
     """
-    TODO: add description
+    This class
     """
     data = []
 
     def __init__(self, n_neighbors):
         """
-        TODO: add description
+        This code initilizes a ImageKNNClassifier class that has k_neighbors as an input parameter
+        and data in the form of a tuple with an image and a image tag string.
         """
         self.n_neighbors = n_neighbors
         ImageKNNClassifier.data = []
 
     def fit(self, data):
         """
-        TODO: add description
+        This code fits a data set that is greater than the number of neighbors, if it has not already been
+        assigned data.
         """
         assert len(data) > self.n_neighbors
         assert len(ImageKNNClassifier.data) == 0
@@ -246,7 +245,8 @@ class ImageKNNClassifier:
     @staticmethod
     def distance(image1, image2):
         """
-        TODO: add description
+        This code compares every pixel intensity in every channel for two images and performs
+        a Euclid distance calculation between them.
         """
         assert isinstance(image1, RGBImage) and isinstance(image2, RGBImage)
         assert image1.size() == image2.size()
@@ -260,7 +260,11 @@ class ImageKNNClassifier:
     @staticmethod
     def vote(candidates):
         """
-        TODO: add description
+        This code takes a list of tags equal to the amount of neighbors
+        in k_neighbors. It first creates a dictionary of tags and the
+        count of how many times they show up. It then sorts them and
+        returns the tag with the highest frequency. If two tags are the
+        highest, it randomly chooses between them.
         """
         label_counter = {}
         for candidate in candidates:
@@ -282,7 +286,10 @@ class ImageKNNClassifier:
 
     def predict(self, image):
         """
-        TODO: add description
+        This code first checks if the dataset in the class is filled. If it
+        is, it then sorts a list of tuple objects with distances and tags,
+        and finally finds the n_neighbors that are the closest and compares
+        tags using vote().
         """
         assert len(ImageKNNClassifier.data) > 0
         distance_tag = [(ImageKNNClassifier.distance(image, tag_img[0]),\
