@@ -4,8 +4,6 @@ Name: Sinjin Serrano and David Perez
 PID:  A16687329 / A16686629
 """
 
-import numpy as np
-
 # Part 1: RGB Image #
 class RGBImage:
     """
@@ -94,7 +92,6 @@ class RGBImage:
         self.pixels[iRED][row][col] = red
         self.pixels[iGREEN][row][col] = green
         self.pixels[iBLUE][row][col] = blue
-
 
 
 # Part 2: Image Processing Methods #
@@ -279,10 +276,7 @@ class ImageKNNClassifier:
             if highest < amount:
                 option = label
                 highest = amount
-            elif highest == amount:
-                option = np.random.choice([option, label])
         return option
-
 
 
     def predict(self, image):
