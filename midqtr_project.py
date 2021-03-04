@@ -9,7 +9,6 @@ import numpy as np
 # Part 1: RGB Image #
 class RGBImage:
     """
-    TODO: review description
     Creates a RGBImage class, an abstraction of an image using RGB colorspace.
 
     The RGB color model is a tuple of three integers (intensity) indicating
@@ -25,7 +24,6 @@ class RGBImage:
     The value stored there is a three-element tuple representing using the
     RGB color model to store that pixel's value.
 
-    TODO: Test methods.
     """
 
     def __init__(self, pixels):
@@ -103,7 +101,6 @@ class RGBImage:
 # Part 2: Image Processing Methods #
 class ImageProcessing:
     """
-    TODO: review description
     A class that contains several different static methods used to manipulate
     RGBImage objects. New instances are returned after being passed through
     these methods.
@@ -117,10 +114,12 @@ class ImageProcessing:
         color value.
         """
 
-        negated_pixels = [[[255 - image.get_pixel(row_ind, col_ind)[run] \
+        MAX = 255
+        CHANNELS = 3
+        negated_pixels = [[[MAX - image.get_pixel(row_ind, col_ind)[run] \
         for col_ind in range(image.size()[1])]\
         for row_ind in range(image.size()[0])]\
-        for run in range(3)]
+        for run in range(CHANNELS)]
 
         return RGBImage(negated_pixels)
 
@@ -132,12 +131,16 @@ class ImageProcessing:
         averaging them and setting all three values to the new value.
         """
 
-        gray_pixels = [[[((image.get_pixel(row_ind, col_ind)[0] +\
-        image.get_pixel(row_ind, col_ind)[1] + \
-        image.get_pixel(row_ind, col_ind)[2]) // 3) \
+        iRED = 0
+        iGREEN = 1
+        iBLUE = 2
+        CHANNELS = 3
+        gray_pixels = [[[((image.get_pixel(row_ind, col_ind)[iRED] +\
+        image.get_pixel(row_ind, col_ind)[iGREEN] + \
+        image.get_pixel(row_ind, col_ind)[iBLUE]) // CHANNELS) \
         for col_ind in range(image.size()[1])]\
         for row_ind in range(image.size()[0])]\
-        for run in range(3)]
+        for run in range(CHANNELS)]
 
 
         return RGBImage(gray_pixels)
