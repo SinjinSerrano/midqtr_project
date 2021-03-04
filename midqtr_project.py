@@ -281,8 +281,8 @@ class ImageKNNClassifier:
         TODO: add description
         """
         assert len(ImageKNNClassifier.data) > 0
-        distance_tag = [(ImageKNNClassifier.distance(image, tag_image[0]),\
+        distance_tag = [(ImageKNNClassifier.distance(image, tag_img[0]),\
         tag_img[1]) for tag_img in ImageKNNClassifier.data]
         distance_tag.sort()
         close_tag = [tag[1] for tag in distance_tag]
-        return ImageKNNClassifier.vote(close_tag[0:n_neighbors - 1])
+        return ImageKNNClassifier.vote(close_tag[0:self.n_neighbors - 1])
